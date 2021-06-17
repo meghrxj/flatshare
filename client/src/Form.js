@@ -35,9 +35,9 @@ export default connect(({ redirectTo, data }) => ({ redirectTo, data }), {
   register,
 })((props) => {
   let [isOpen, setIsOpen] = useState(false);
-  let [selected, setSelected] = useState("None");
-  let [name, setName] = useState("N/A");
-  let [number, setNum] = useState("N/A");
+  let [selected, setSelected] = useState("");
+  let [name, setName] = useState("");
+  let [number, setNum] = useState("");
   let [error, setError] = useState("");
 
   function closeModal() {
@@ -50,18 +50,15 @@ export default connect(({ redirectTo, data }) => ({ redirectTo, data }), {
 
   const handleSubmit = async (e) => {
     if (
-      name === "N/A" ||
       name === "" ||
-      number === "N/A" ||
       number === "" ||
-      selected === "None" ||
       selected === ""
     ) {
-      let str = "Name | Mobile Number | City  are required\n";
+      let str = "Name | Mobile Number | City  are required.\n";
       setError(str);
       return;
     } else if (isNaN(parseInt(number))) {
-      let str = "Mobile Number is not valid";
+      let str = "Mobile Number is invalid";
       setError(str);
       return;
     } else {

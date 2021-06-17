@@ -16,7 +16,7 @@ export default connect(
         <div className=" flex flex-col justify-center items-center ">
           <div>
             <span className="flex text-white  text-4xl p-10 m-10">
-              {name} We'll text you the invite soon. You are {count} on the
+              {name}, we'll text you the invite soon. You are {count} on the
               waiting list, Invite your firends to move up in the list
             </span>
           </div>
