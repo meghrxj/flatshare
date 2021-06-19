@@ -1,23 +1,10 @@
-import { Listbox, Dialog, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 import { Redirect } from "react-router";
 import { register } from "./form handler/register";
 import { connect } from "react-redux";
 import MuiAlert from "@material-ui/lab/Alert";
-
-let people = [
-  { name: "Mumbai" },
-  { name: "Delhi" },
-  { name: "Pune" },
-  { name: "Nashik" },
-  { name: "CIty Name" },
-];
-
-setTimeout(() => {
-  people.pop();
-}, 2000);
 
 function Alert(props) {
   return (
@@ -36,6 +23,7 @@ export default connect(({ redirectTo, data }) => ({ redirectTo, data }), {
 })((props) => {
   let [isOpen, setIsOpen] = useState(false);
   let [selected, setSelected] = useState("");
+  let [email, setEmail] = useState("");
   let [name, setName] = useState("");
   let [number, setNum] = useState("");
   let [error, setError] = useState("");
@@ -49,11 +37,7 @@ export default connect(({ redirectTo, data }) => ({ redirectTo, data }), {
   }
 
   const handleSubmit = async (e) => {
-    if (
-      name === "" ||
-      number === "" ||
-      selected === ""
-    ) {
+    if (name === "" || number === "" || selected === "" || email === "") {
       let str = "Name | Mobile Number | City  are required.\n";
       setError(str);
       return;
@@ -62,7 +46,7 @@ export default connect(({ redirectTo, data }) => ({ redirectTo, data }), {
       setError(str);
       return;
     } else {
-      props.register({ name, number, selected });
+      props.register({ name, number, selected, email });
     }
   };
 
@@ -145,73 +129,24 @@ export default connect(({ redirectTo, data }) => ({ redirectTo, data }), {
                     />
                   </div>
                   <div className="flex flex-col m-2">
+                    <span>Email</span>
+                    <input
+                      type="text"
+                      className="p-2 border-0 border-b-2 border-purple focus:ring-opacity-0"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      name="email"
+                    />
+                  </div>
+                  <div className="flex flex-col m-2">
                     <span>City</span>
-
-                    <Listbox value={selected} onChange={setSelected}>
-                      <div className="relative mt-1">
-                        <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
-                          <span className="block truncate">
-                            {selected.name}
-                          </span>
-                          <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                            <SelectorIcon
-                              className="w-5 h-5 text-gray-400"
-                              aria-hidden="true"
-                            />
-                          </span>
-                        </Listbox.Button>
-                        <Transition
-                          as={Fragment}
-                          leave="transition ease-in duration-100"
-                          leaveFrom="opacity-100"
-                          leaveTo="opacity-0"
-                        >
-                          <Listbox.Options className="absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            {people.map((person, personIdx) => (
-                              <Listbox.Option
-                                key={personIdx}
-                                className={({ active }) =>
-                                  `${
-                                    active
-                                      ? "text-amber-900 bg-amber-100"
-                                      : "text-gray-900"
-                                  }
-                          cursor-default select-none relative py-2 pl-10 pr-4`
-                                }
-                                value={person}
-                              >
-                                {({ selected, active }) => (
-                                  <>
-                                    <span
-                                      className={`${
-                                        selected ? "font-medium" : "font-normal"
-                                      } block truncate`}
-                                    >
-                                      {person.name}
-                                    </span>
-                                    {selected ? (
-                                      <span
-                                        className={`${
-                                          active
-                                            ? "text-amber-600"
-                                            : "text-amber-600"
-                                        }
-                                absolute inset-y-0 left-0 flex items-center pl-3`}
-                                      >
-                                        <CheckIcon
-                                          className="w-5 h-5"
-                                          aria-hidden="true"
-                                        />
-                                      </span>
-                                    ) : null}
-                                  </>
-                                )}
-                              </Listbox.Option>
-                            ))}
-                          </Listbox.Options>
-                        </Transition>
-                      </div>
-                    </Listbox>
+                    <input
+                      type="text"
+                      className="p-2 border-0 border-b-2 border-purple focus:ring-opacity-0"
+                      value={selected}
+                      onChange={(e) => setSelected(e.target.value)}
+                      name="name"
+                    />
                   </div>
 
                   <div className="flex justify-center ">

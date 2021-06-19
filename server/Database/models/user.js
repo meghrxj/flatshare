@@ -7,6 +7,9 @@ const userSchema = mongoose.Schema({
   number: {
     type: String,
   },
+  email: {
+    type: String,
+  },
   city: {
     type: String,
   },

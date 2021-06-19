@@ -8,7 +8,7 @@ const app = express();
 //use cors to allow cross origin resource sharing
 app.use(
   cors({
-    origin: "https://joinflatshare.com",
+    origin: "http://127.0.0.1:3000/",
     credentials: true,
   })
 );

@@ -6,12 +6,14 @@ module.exports = {
     ct = ct.length + 2523 + 1;
     let name = data.name;
     let number = data.number;
-    let city = data.selected.name;
+    let city = data.selected;
+    let email = data.email;
 
     let user = await db.findOne({
       name: name,
       number: number,
       city: city,
+      email: email,
     });
 
     if (user) {
@@ -25,6 +27,7 @@ module.exports = {
           number: number,
           city: city,
           count: ct.toString(),
+          email: email,
         });
 
         await newuser.save().then((r) => console.log(r));

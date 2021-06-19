@@ -12,6 +12,7 @@ const Error = () => {
         <div>
           <span className="flex text-white  text-4xl p-10 m-10">
             If you still experience the same error please mail me at @mail.com
+            or Discord- CQE™Rohan#7248
           </span>
         </div>
       </div>
